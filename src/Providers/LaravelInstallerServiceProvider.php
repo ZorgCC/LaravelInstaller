@@ -23,8 +23,7 @@ class LaravelInstallerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->publishFiles();
-        $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
+
     }
 
     /**
@@ -34,6 +33,10 @@ class LaravelInstallerServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
+
+        $this->publishFiles();
+        $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
+
         $router->middlewareGroup('install', [CanInstall::class]);
         $router->middlewareGroup('update', [CanUpdate::class]);
     }

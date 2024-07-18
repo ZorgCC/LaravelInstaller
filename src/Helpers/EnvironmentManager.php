@@ -109,12 +109,6 @@ class EnvironmentManager
 
         $envFileData .= 'APP_KEY=' . 'base64:' . base64_encode(Str::random(32)) . "\n";
 
-        $envFileData .= 'VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"' . "\n";
-        $envFileData .= 'VITE_PUSHER_HOST="${PUSHER_HOST}"' . "\n";
-        $envFileData .= 'VITE_PUSHER_PORT="${PUSHER_PORT}"' . "\n";
-        $envFileData .= 'VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"' . "\n";
-        $envFileData .= 'VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"' . "\n";
-
         try {
             file_put_contents($this->envPath, $envFileData);
         } catch (Exception $e) {

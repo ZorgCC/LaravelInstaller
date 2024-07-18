@@ -13,10 +13,10 @@ return [
     |
     */
     'core' => [
-        'minPhpVersion' => '8.0.0',
+        'minPhpVersion' => '8.1.16',
     ],
     'final' => [
-        'key' => true,
+        'key' => false,
         'publish' => false,
     ],
     'requirements' => [
@@ -26,7 +26,7 @@ return [
             'mbstring',
             'tokenizer',
             'JSON',
-            'cURL',
+            'cURL'
         ],
         'apache' => [
             'mod_rewrite',
@@ -43,9 +43,9 @@ return [
     |
     */
     'permissions' => [
-        'storage/framework/'     => '775',
-        'storage/logs/'          => '775',
-        'bootstrap/cache/'       => '775',
+        'storage/framework/'     => '755',
+        'storage/logs/'          => '755',
+        'bootstrap/cache/'       => '755',
     ],
 
     /*
@@ -58,7 +58,14 @@ return [
     |
     */
     'artisan_command' => [
-        'db:seed' => ['--force' => true]
+        'db:seed' => ['--force' => true],
+        'testurion:user:create' => [
+            '--name' => env('ADMIN_NAME'),
+            '--email' => env('ADMIN_EMAIL'),
+            '--password' => env('ADMIN_PASSWORD'),
+            '--is_admin' => true
+        ],
+        'testurion:install:clean' => []
     ],
 
     /*
@@ -73,36 +80,33 @@ return [
     'environment' => [
         'form' => [
             'rules' => [
+                'admin_name'            => 'required|string|max:50',
+                'admin_email'           => 'required|email|max:50',
+                'admin_password'        => 'required|string|max:50',
                 'app_name'              => 'required|string|max:50',
-                'environment'           => 'required|string|max:50',
+                'app_env'               => 'required|string|max:50',
                 'environment_custom'    => 'required_if:environment,other|max:50',
                 'app_debug'             => 'required|string',
-                'app_log_level'         => 'required|string|max:50',
+                'log_level'             => 'required|string|max:50',
                 'app_url'               => 'required|url',
-                'database_connection'   => 'required|string|max:50',
-                'database_hostname'     => 'required|string|max:50',
-                'database_port'         => 'required|numeric',
-                'database_name'         => 'required|string|max:50',
-                'database_username'     => 'required|string|max:50',
-                'database_password'     => 'nullable|string|max:50',
-                'broadcast_driver'      => 'required|string|max:50',
-                'cache_driver'          => 'required|string|max:50',
-                'session_driver'        => 'required|string|max:50',
-                'queue_connection'      => 'required|string|max:50',
-                'redis_hostname'        => 'required|string|max:50',
-                'redis_password'        => 'required|string|max:50',
-                'redis_port'            => 'required|numeric',
-                'mail_driver'           => 'required|string|max:50',
+                'db_connection'         => 'required|string|max:50',
+                'db_host'               => 'required|string|max:50',
+                'db_port'               => 'required|numeric',
+                'db_database'           => 'required|string|max:50',
+                'db_username'           => 'required|string|max:50',
+                'db_password'           => 'nullable|string|max:50',
+                'mail_mailer'           => 'required|string|max:50',
                 'mail_host'             => 'required|string|max:50',
                 'mail_port'             => 'required|string|max:50',
                 'mail_username'         => 'required|string|max:50',
                 'mail_password'         => 'required|string|max:50',
-                'mail_encryption'       => 'required|string|max:50',
-                'pusher_app_id'         => 'max:50',
-                'pusher_app_key'        => 'max:50',
-                'pusher_app_secret'     => 'max:50',
+                'mail_encryption'       => 'required|string|max:50'
             ],
         ],
+        'ignoreOnSave' => ['_token', 'appSettingsTabs'],
+        'cleanAfterInstall' => [
+            'ADMIN_NAME', 'ADMIN_EMAIL', 'ADMIN_PASSWORD'
+        ]
     ],
 
     /*
@@ -150,5 +154,6 @@ return [
     |
     */
     'updaterEnabled' => 'true',
+
 
 ];

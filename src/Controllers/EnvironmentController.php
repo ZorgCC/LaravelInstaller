@@ -99,7 +99,7 @@ class EnvironmentController extends Controller
 
         if (! $this->checkDatabaseConnection($request)) {
             return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors([
-                'database_connection' => trans('installer_messages.environment.wizard.form.db_connection_failed'),
+                'db_connection' => trans('installer_messages.environment.wizard.form.db_connection_failed'),
             ]);
         }
 
@@ -119,7 +119,7 @@ class EnvironmentController extends Controller
      */
     private function checkDatabaseConnection(Request $request)
     {
-        $connection = $request->input('database_connection');
+        $connection = $request->input('db_connection');
 
         $settings = config("database.connections.$connection");
 
@@ -129,11 +129,11 @@ class EnvironmentController extends Controller
                 'connections' => [
                     $connection => array_merge($settings, [
                         'driver' => $connection,
-                        'host' => $request->input('database_hostname'),
-                        'port' => $request->input('database_port'),
-                        'database' => $request->input('database_name'),
-                        'username' => $request->input('database_username'),
-                        'password' => $request->input('database_password'),
+                        'host' => $request->input('db_host'),
+                        'port' => $request->input('db_port'),
+                        'database' => $request->input('db_name'),
+                        'username' => $request->input('db_username'),
+                        'password' => $request->input('db_password'),
                     ]),
                 ],
             ],
