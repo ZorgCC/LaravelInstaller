@@ -1,6 +1,6 @@
 <?php
 
-namespace ZorgCC\LaravelInstaller\Helpers;
+namespace HaoZiTeam\LaravelInstaller\Helpers;
 
 use Illuminate\Support\Facades\DB;
 
