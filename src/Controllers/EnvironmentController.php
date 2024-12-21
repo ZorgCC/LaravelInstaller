@@ -94,11 +94,11 @@ class EnvironmentController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors($validator->errors());
+            return $redirect->back()->withInput()->withErrors($validator->errors());
         }
 
         if (! $this->checkDatabaseConnection($request)) {
-            return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors([
+            return $redirect->back()->withInput()->withErrors([
                 'db_connection' => trans('installer_messages.environment.wizard.form.db_connection_failed'),
             ]);
         }
