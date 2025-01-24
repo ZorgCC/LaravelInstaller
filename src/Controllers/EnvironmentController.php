@@ -107,7 +107,7 @@ class EnvironmentController extends Controller
 
         event(new EnvironmentSaved($request));
 
-        return $redirect->route('LaravelInstaller::database')
+        return $redirect->to('/install/database')
                         ->with(['results' => $results]);
     }
 
