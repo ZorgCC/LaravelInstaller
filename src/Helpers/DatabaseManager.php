@@ -7,6 +7,7 @@ use Illuminate\Database\SQLiteConnection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class DatabaseManager
@@ -34,10 +35,12 @@ class DatabaseManager
     private function migrate(BufferedOutput $outputLog)
     {
         try {
+            Log::info('before migrate: ' . config('app.key'));
             Artisan::call('migrate', ['--force'=> true], $outputLog);
             $other_commands = config('installer.artisan_command');
             if (!empty($other_commands)) {
                 foreach ($other_commands as $key => $value) {
+                    Log::info("before : $key" . config('app.key'));
                     Artisan::call($key, $value, $outputLog);
                 }
             }
