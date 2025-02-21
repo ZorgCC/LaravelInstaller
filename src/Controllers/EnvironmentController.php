@@ -105,9 +105,11 @@ class EnvironmentController extends Controller
 
         $results = $this->EnvironmentManager->saveFileWizard($request);
 
+        config(["app.url" => $request->input('app_url')]);
+
         event(new EnvironmentSaved($request));
 
-        return $redirect->to('/install/database')
+        return $redirect->to($request->input('app_url') . '/install/database')
                         ->with(['results' => $results]);
     }
 
