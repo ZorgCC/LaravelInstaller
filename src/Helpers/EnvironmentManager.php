@@ -101,10 +101,16 @@ class EnvironmentManager
                 continue;
             }
             if (!empty($env_var_value)) {
+
+                if ($env_var_name === 'app_url') {
+                    $env_var_value = rtrim($env_var_value, '/');
+                }
+
                 $envFileData .= mb_strtoupper($env_var_name) . '="' . $env_var_value . "\"\n";
+
+
+
             }
-
-
         }
 
         $envFileData .= 'APP_KEY=' . 'base64:' . base64_encode(Str::random(32)) . "\n";

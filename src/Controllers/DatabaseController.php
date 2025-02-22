@@ -28,8 +28,6 @@ class DatabaseController extends Controller
     public function database()
     {
 
-        Log::info(config('app.key'));
-
         $response = $this->databaseManager->migrateAndSeed();
 
         return redirect()->route('LaravelInstaller::final')
