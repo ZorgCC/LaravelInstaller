@@ -105,7 +105,7 @@ class EnvironmentController extends Controller
 
         $results = $this->EnvironmentManager->saveFileWizard($request);
 
-        config(["app.url" => $request->input('app_url')]);
+        config(["app.url" => rtrim($request->input('app_url'), '/')]);
 
         event(new EnvironmentSaved($request));
 
