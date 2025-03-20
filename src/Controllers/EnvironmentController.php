@@ -109,7 +109,7 @@ class EnvironmentController extends Controller
 
         event(new EnvironmentSaved($request));
 
-        return $redirect->to($request->input('app_url') . '/install/database')
+        return $redirect->to(rtrim($request->input('app_url'), '/') . '/install/database')
                         ->with(['results' => $results]);
     }
 
